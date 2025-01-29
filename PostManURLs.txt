@@ -1,0 +1,27 @@
+Check Credit Score by passing all arguments
+
+curl --location 'http://localhost:8080/api/credit/calculate' \
+--header 'Content-Type: application/json' \
+--header 'Cookie: JSESSIONID=A3397EAFB17F58F31CD1281D0CB6C360' \
+--data '{
+  "company_name": "Tech Innovations Ltd",
+  "company_status": "Active",
+  "company_number": 12345,
+  "date_of_creation": "2015-05-15",
+  "registrationNumber": "12345678",
+  "companyType": "Private Limited",
+  "natureOfBusiness": "Technology",
+  "resignedDirectorsPercentage": 5,
+  "statementOfCapital": 15000,
+  "confirmationStatement": "every year",
+  "companyWebDomain": "https://www.techinnovations.com",
+  "companySize": 150,
+  "industrySector": "Technology"
+}'
+
+
+Check Credit Score by passing company Number (LIVE API Call)
+
+curl --location --request POST 'http://localhost:8080/api/credit/calculate/live/03967671' \
+--header 'Cookie: JSESSIONID=A3397EAFB17F58F31CD1281D0CB6C360' \
+--data ''
