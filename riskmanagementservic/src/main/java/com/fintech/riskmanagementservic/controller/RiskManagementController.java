@@ -45,28 +45,11 @@ public class RiskManagementController {
 	
 	@PostMapping("calculate/live/{companyNumber}")
 	public CreditScoreResponse calculateCreditScoreUsingCompanyNumber(@PathVariable("companyNumber") String companyNumber) {
-		String response = getCompanyApi(companyNumber);
+		String response = riskManagement.getCompanyApi(companyNumber);
 		Company company = companyInfoConverter.getCompanyInfoFromJson(response);
 		int score = riskManagement.riskCalculation(company);
 		String riskLevel = riskManagement.riskLevel(score);
 		return new CreditScoreResponse(score, riskLevel);
-	}
-	
-	public String getCompanyApi(String companyNumber) {
-	    final String uri = "https://api.company-information.service.gov.uk/company/".concat(companyNumber);
-	    
-        RestTemplate restTemplate = new RestTemplate();
-        HttpHeaders header = new HttpHeaders();
-        header.set(HttpHeaders.HOST, "api.company-information.service.gov.uk");
-        header.set(HttpHeaders.AUTHORIZATION, "f02ca086-7db4-4092-8f57-8cd4cd34dddf");
-        
-        HttpEntity<String> requestEntity = new HttpEntity<String>("body", header);
-        ResponseEntity<String> responseEntity =  restTemplate.exchange(uri, HttpMethod.GET, requestEntity, String.class);
-        
-        String response = responseEntity.getBody();
-        System.out.println();
-        return response;
-		
 	}
 	
 	
